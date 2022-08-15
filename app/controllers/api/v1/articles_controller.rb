@@ -30,6 +30,16 @@ module Api
 				render json: {status: 'SUCCESS', message:'Deleted article', data:article},status: :ok
 			end
 
+      # Atualizar um artigo
+			def update
+				article = Article.find(params[:id])
+				if article.update_attributes(article_params)
+					render json: {status: 'SUCCESS', message:'Updated article', data:article},status: :ok
+				else
+					render json: {status: 'ERROR', message:'Articles not update', data:article.erros},status: :unprocessable_entity
+				end
+			end
+
 			# Parametros aceitos
 			private
 			def article_params
