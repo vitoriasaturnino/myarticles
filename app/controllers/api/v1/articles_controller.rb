@@ -22,6 +22,14 @@ module Api
 					render json: {status: 'ERROR', message:'Articles not saved', data:article.erros},status: :unprocessable_entity
 				end
 			end
+
+      # Excluir artigo
+			def destroy
+				article = Article.find(params[:id])
+				article.destroy
+				render json: {status: 'SUCCESS', message:'Deleted article', data:article},status: :ok
+			end
+
 			# Parametros aceitos
 			private
 			def article_params
